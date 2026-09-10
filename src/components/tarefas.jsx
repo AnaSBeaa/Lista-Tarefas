@@ -4,6 +4,7 @@ import "../css/style.css";
 
 const Tarefas = () => {
 
+  // HOOK: useState é utilizado para criar e controlar os estados da aplicação.
   const [tarefas, setTarefas] = useState(() => {
 
     const tarefasSalvas = localStorage.getItem("lista-tarefas");
@@ -20,6 +21,8 @@ const Tarefas = () => {
   const [filtro, setFiltro] = useState("todas");
 
 
+    // HOOK: useEffect é utilizado para salvar as tarefas automaticamente no localStorage 
+    // sempre que o estado tarefas é alterado.
   useEffect(() => {
 
     localStorage.setItem(
@@ -29,6 +32,7 @@ const Tarefas = () => {
 
   }, [tarefas]);
 
+  // CALLBACK: esta função é executada quando o formulário é enviado.
   const adicionarTarefa = (e) => {
 
     e.preventDefault();
@@ -56,6 +60,9 @@ const Tarefas = () => {
   };
 
 
+  // MÉTODO filter(): cria uma nova lista contendo apenas
+  // as tarefas cujo id é diferente do id informado.
+  // CALLBACK: a função dentro do filter é executada para cada tarefa.
   const removerTarefa = (id) => {
 
     const tarefasAtualizadas = tarefas.filter(
@@ -65,6 +72,8 @@ const Tarefas = () => {
     setTarefas(tarefasAtualizadas);
   };
 
+  // MÉTODO map(): percorre todas as tarefas e cria uma nova lista.
+  // CALLBACK: a função dentro do map é executada para cada tarefa.
   const alternarConcluida = (id) => {
 
     const tarefasAtualizadas = tarefas.map(
@@ -86,6 +95,8 @@ const Tarefas = () => {
   };
 
 
+  // MÉTODO filter(): utilizado novamente para criar a lista
+  // de tarefas de acordo com o filtro selecionado.
   const tarefasFiltradas = tarefas.filter(
     (tarefa) => {
 
@@ -114,6 +125,8 @@ const Tarefas = () => {
       </header>
 
       <form
+        // CALLBACK: adicionaTarefa é chamada quando o formulário
+        // é enviado pelo usuário.
         onSubmit={adicionarTarefa}
         className="formulario"
       >
@@ -123,6 +136,8 @@ const Tarefas = () => {
           <input
             type="text"
             value={nome}
+            // CALLBACK: executada sempre que o usuário altera
+            // o conteúdo do campo de nome.
             onChange={(e) =>
               setNome(e.target.value)
             }
@@ -135,6 +150,8 @@ const Tarefas = () => {
           <input
             type="date"
             value={data}
+            // CALLBACK: atualiza o estado da data quando
+            // o usuário altera o campo.
             onChange={(e) =>
               setData(e.target.value)
             }
@@ -146,6 +163,7 @@ const Tarefas = () => {
           <label>Descrição</label>
           <textarea
             value={descricao}
+            // CALLBACK: atualiza o estado da descrição.
             onChange={(e) =>
               setDescricao(e.target.value)
             }
@@ -159,6 +177,8 @@ const Tarefas = () => {
           <label>Nível de prioridade</label>
           <select
             value={prioridade}
+            // CALLBACK: atualiza o estado da prioridade
+            // quando o usuário seleciona uma opção.
             onChange={(e) =>
               setPrioridade(e.target.value)
             }
@@ -181,6 +201,8 @@ const Tarefas = () => {
       <div className="filtros">
 
         <button
+          // CALLBACK: altera o filtro para "todas"
+          // quando o botão é clicado.
           onClick={() => setFiltro("todas")}
           className={
             filtro === "todas"
@@ -193,6 +215,7 @@ const Tarefas = () => {
 
 
         <button
+        // CALLBACK: altera o filtro para "pendentes".
           onClick={() => setFiltro("pendentes")}
           className={
             filtro === "pendentes"
@@ -202,6 +225,8 @@ const Tarefas = () => {
         >Pendentes
           <span>
             {
+              // MÉTODO filter(): conta somente as tarefas
+              // que ainda não foram concluídas.
               tarefas.filter(
                 (tarefa) => !tarefa.concluida
               ).length
@@ -211,6 +236,7 @@ const Tarefas = () => {
 
 
         <button
+        // CALLBACK: altera o filtro para "concluidas".
           onClick={() => setFiltro("concluidas")}
           className={
             filtro === "concluidas"
@@ -220,6 +246,8 @@ const Tarefas = () => {
         >Concluídas
           <span>
             {
+              // MÉTODO filter(): conta somente as tarefas
+              // que já foram concluídas.
               tarefas.filter(
                 (tarefa) => tarefa.concluida
               ).length
@@ -232,6 +260,8 @@ const Tarefas = () => {
 
       <div className="lista-tarefas">
 
+        {/* // MÉTODO map(): percorre a lista de tarefas filtradas
+          // e cria um elemento visual para cada tarefa. */}
         {tarefasFiltradas.map(
           (tarefa) => (
 
@@ -300,6 +330,8 @@ const Tarefas = () => {
 
               <div className="acoes">
                 <button
+                // CALLBACK: executa a função alternarConcluida
+                // quando o usuário clica no botão.
                   onClick={() =>
                     alternarConcluida(tarefa.id)
                   }
@@ -314,6 +346,8 @@ const Tarefas = () => {
 
 
                 <button
+                // CALLBACK: executa a função removerTarefa
+                // passando o id da tarefa selecionada.
                   onClick={() =>
                     removerTarefa(tarefa.id)
                   }
