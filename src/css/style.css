@@ -1,0 +1,349 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(
+    135deg,
+    #eef2ff,
+    #dbeafe
+  );
+  min-height: 100vh;
+  color: #1f2937;
+}
+
+
+.container-tarefas {
+  width: 90%;
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 25px;
+}
+
+
+.cabecalho {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.cabecalho h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #3730a3;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.cabecalho p {
+  color: #6b7280;
+  font-size: 15px;
+}
+
+
+.formulario {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+  margin-bottom: 25px;
+}
+
+.formulario h2 {
+  color: #3730a3;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.campo {
+  margin-bottom: 18px;
+}
+
+.campo label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 7px;
+  color: #374151;
+}
+
+.campo input,
+.campo textarea,
+.campo select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+  background: #f8fafc;
+  outline: none;
+  transition: 0.2s;
+}
+
+.campo input:focus,
+.campo textarea:focus,
+.campo select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.campo textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+
+.botao-adicionar {
+  width: 100%;
+  border: none;
+  padding: 13px;
+  border-radius: 10px;
+  background: #4338ca;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botao-adicionar:hover {
+  background: #3730a3;
+  transform: translateY(-1px);
+}
+
+
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.filtro {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: white;
+  color: #374151;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  transition: 0.2s;
+}
+
+.filtro:hover {
+  background: #e0e7ff;
+}
+
+.filtro.ativo {
+  background: #4338ca;
+  color: white;
+}
+
+.filtro span {
+  margin-left: 7px;
+  background: #e5e7eb;
+  color: #374151;
+  padding: 2px 7px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.filtro.ativo span {
+  background: white;
+  color: #4338ca;
+}
+
+.lista-tarefas {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card-tarefa {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: 0.2s;
+}
+
+.card-tarefa:hover {
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-tarefa.concluida {
+  border-left-color: #16a34a;
+  opacity: 0.75;
+}
+
+.card-tarefa.concluida h3 {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+.card-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 12px;
+}
+
+.card-topo h3 {
+  font-size: 20px;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.prioridade {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.prioridade.alta {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.prioridade.media {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.prioridade.baixa {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status {
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.status.pendente {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status.concluida {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.data-tarefa {
+  color: #4b5563;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.descricao-tarefa {
+  color: #4b5563;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  word-break: break-word;
+}
+
+.acoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.botao-concluir,
+.botao-excluir {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 9px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botao-concluir {
+  background: #16a34a;
+}
+
+.botao-concluir:hover {
+  background: #15803d;
+}
+
+.botao-excluir {
+  background: #dc2626;
+}
+
+.botao-excluir:hover {
+  background: #b91c1c;
+}
+
+.nenhuma-tarefa {
+  background: white;
+  padding: 35px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.nenhuma-tarefa p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #374151;
+  margin-bottom: 5px;
+}
+
+.nenhuma-tarefa span {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+
+  .container-tarefas {
+    width: 95%;
+    margin: 20px auto;
+    padding: 10px;
+  }
+
+  .cabecalho h1 {
+    font-size: 23px;
+  }
+
+  .card-topo {
+    flex-direction: column;
+  }
+
+  .status {
+    align-self: flex-start;
+  }
+
+  .acoes {
+    flex-direction: column;
+  }
+
+  .botao-concluir,
+  .botao-excluir {
+    width: 100%;
+  }
+
+
+}
