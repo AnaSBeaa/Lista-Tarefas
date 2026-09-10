@@ -1,4 +1,4 @@
-import Tarefas from "./components/tarefas";
+import Tarefas from "./components/Tarefas";
 
 function App() {
   return (
