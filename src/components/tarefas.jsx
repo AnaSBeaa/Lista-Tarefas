@@ -3,12 +3,26 @@ import { Home, Check, Trash2 } from "lucide-react";
 import "../css/style.css";
 
 const Tarefas = () => {
-    const [tarefas, setTarefas] = useState([]);
+const [tarefas, setTarefas] = useState(() => {
+  const tarefasSalvas = localStorage.getItem("lista-tarefas");
+
+  return tarefasSalvas
+    ? JSON.parse(tarefasSalvas)
+    : [];
+});
 
 const [nome, setNome] = useState("");
 const [data, setData] = useState("");
 const [descricao, setDescricao] = useState("");
 const [prioridade, setPrioridade] = useState("Média");
+const [filtro, setFiltro] = useState("todas");
+
+useEffect(() => {
+  localStorage.setItem(
+    "lista-tarefas",
+    JSON.stringify(tarefas)
+  );
+}, [tarefas]);
 
 const adicionarTarefa = (e) => {
   e.preventDefault();
@@ -56,6 +70,20 @@ const alternarConcluida = (id) => {
 
   setTarefas(tarefasAtualizadas);
 };
+
+const tarefasFiltradas = tarefas.filter(
+  (tarefa) => {
+    if (filtro === "pendentes") {
+      return !tarefa.concluida;
+    }
+
+    if (filtro === "concluidas") {
+      return tarefa.concluida;
+    }
+
+    return true;
+  }
+);
 
 return(
     <form onSubmit={adicionarTarefa} className="formulario">
@@ -107,8 +135,60 @@ return(
         </button>
     </form>
 
+    <div className="filtros">
+
+    <button
+        onClick={() => setFiltro("todas")}
+        className={
+        filtro === "todas"
+            ? "filtro ativo"
+            : "filtro"
+        }
+    >
+        Todas
+        <span>{tarefas.length}</span>
+    </button>
+
+    <button
+        onClick={() => setFiltro("pendentes")}
+        className={
+        filtro === "pendentes"
+            ? "filtro ativo"
+            : "filtro"
+        }
+    >
+        Pendentes
+        <span>
+        {
+            tarefas.filter(
+            (tarefa) => !tarefa.concluida
+            ).length
+        }
+        </span>
+    </button>
+
+    <button
+        onClick={() => setFiltro("concluidas")}
+        className={
+        filtro === "concluidas"
+            ? "filtro ativo"
+            : "filtro"
+        }
+    >
+        Concluídas
+        <span>
+        {
+            tarefas.filter(
+            (tarefa) => tarefa.concluida
+            ).length
+        }
+        </span>
+    </button>
+
+    </div>
+
     <div className="lista-tarefas">
-    {tarefas.map((tarefa) => (
+    {tarefasFiltradas.map((tarefa) => (
         <div
   key={tarefa.id}
   className={
