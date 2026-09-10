@@ -26,6 +26,9 @@ Com a aplicação, o usuário pode:
 
 O projeto também foi desenvolvido para praticar conceitos importantes do **React**, como Hooks, estados, eventos, callbacks e métodos de manipulação de arrays.
 
+## Repositório no GitHub
+https://github.com/AnaSBeaa/Lista-Tarefas
+
 ## Tecnologias (Stack)
 
 As principais tecnologias utilizadas no projeto são:

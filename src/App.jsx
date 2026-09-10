@@ -1,4 +1,4 @@
-import Tarefas from "./components/Tarefas.jsx";
+import Tarefas from "./components/tarefas";
 
 function App() {
   return (
