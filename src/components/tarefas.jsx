@@ -34,6 +34,15 @@ const adicionarTarefa = (e) => {
   setPrioridade("Média");
 };
 
+  const removerTarefa = (id) => {
+
+    const tarefasAtualizadas = tarefas.filter(
+      (tarefa) => tarefa.id !== id
+    );
+
+    setTarefas(tarefasAtualizadas);
+  };
+
 return(
     <form onSubmit={adicionarTarefa} className="formulario">
         <h2>Nova tarefa</h2>
@@ -83,4 +92,34 @@ return(
         Adicionar tarefa
         </button>
     </form>
+
+    <div className="lista-tarefas">
+    {tarefas.map((tarefa) => (
+        <div className="card-tarefa" key={tarefa.id}>
+        <h3>{tarefa.nome}</h3>
+
+        {tarefa.data && (
+            <p>
+            Data:{" "}
+            {new Date(
+                tarefa.data + "T00:00:00"
+            ).toLocaleDateString("pt-BR")}
+            </p>
+        )}
+
+        {tarefa.descricao && (
+            <p>{tarefa.descricao}</p>
+        )}
+
+        <p>Prioridade: {tarefa.prioridade}</p>
+
+        <button
+            onClick={() => removerTarefa(tarefa.id)}
+            className="botao-excluir"
+        >
+            Excluir
+        </button>
+        </div>
+    ))}
+    </div>
 )
