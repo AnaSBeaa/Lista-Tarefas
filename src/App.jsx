@@ -1,11 +1,10 @@
-import React from 'react'
+import Tarefas from "./components/Tarefas";
 
-const App = () => {
+function App() {
   return (
-    <>
-      
-    </>
-  )
+    <Tarefas />
+  );
 }
 
-export default App
+export default App;
+
