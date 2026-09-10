@@ -18,13 +18,14 @@ const adicionarTarefa = (e) => {
     return;
   }
 
-  const novaTarefa = {
+    const novaTarefa = {
     id: Date.now(),
     nome: nome,
     data: data,
     descricao: descricao,
-    prioridade: prioridade
-  };
+    prioridade: prioridade,
+    concluida: false
+    };
 
   setTarefas([...tarefas, novaTarefa]);
 
@@ -39,9 +40,22 @@ const adicionarTarefa = (e) => {
     const tarefasAtualizadas = tarefas.filter(
       (tarefa) => tarefa.id !== id
     );
+const alternarConcluida = (id) => {
+  const tarefasAtualizadas = tarefas.map(
+    (tarefa) => {
+      if (tarefa.id === id) {
+        return {
+          ...tarefa,
+          concluida: !tarefa.concluida
+        };
+      }
 
-    setTarefas(tarefasAtualizadas);
-  };
+      return tarefa;
+    }
+  );
+
+  setTarefas(tarefasAtualizadas);
+};
 
 return(
     <form onSubmit={adicionarTarefa} className="formulario">
@@ -95,7 +109,14 @@ return(
 
     <div className="lista-tarefas">
     {tarefas.map((tarefa) => (
-        <div className="card-tarefa" key={tarefa.id}>
+        <div
+  key={tarefa.id}
+  className={
+    tarefa.concluida
+      ? "card-tarefa concluida"
+      : "card-tarefa"
+  }
+>
         <h3>{tarefa.nome}</h3>
 
         {tarefa.data && (
@@ -112,6 +133,25 @@ return(
         )}
 
         <p>Prioridade: {tarefa.prioridade}</p>
+
+        <p>
+        Status:{" "}
+        {tarefa.concluida
+            ? "Concluída"
+            : "Pendente"}
+        </p>
+
+        <button
+            onClick={() =>
+                alternarConcluida(tarefa.id)
+            }
+            className="botao-concluir"
+            >
+            <Check size={18} />
+            {tarefa.concluida
+                ? "Reabrir"
+                : "Concluir"}
+        </button>
 
         <button
             onClick={() => removerTarefa(tarefa.id)}
